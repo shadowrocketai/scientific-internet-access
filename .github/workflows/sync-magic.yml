@@ -1,0 +1,43 @@
+name: Sync to Magic-Internet-Access
+on:
+  push:
+    tags:
+      - 'v*'
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Sync to Magic repo
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          VERSION="${TAG#v}"
+          
+          git clone https://shadowrocketai:${GH_TOKEN}@github.com/shadowrocketai/Magic-Internet-Access.git /tmp/magic
+          cd /tmp/magic
+          git config user.name "shadowrocketai"
+          git config user.email "shadowrocketai@users.noreply.github.com"
+          
+          # 同步脚本（核心代码完全一致）
+          cp -r ${GITHUB_WORKSPACE}/scripts/* scripts/
+          
+          # 更新SKILL.md版本号
+          sed -i "s/^version: .*/version: ${VERSION}/" SKILL.md
+          
+          # 更新CHANGELOG
+          cp ${GITHUB_WORKSPACE}/CHANGELOG.md CHANGELOG.md
+          sed -i 's/scientific-internet-access/magic-internet-access/g' CHANGELOG.md
+          sed -i 's/Scientific Internet Access/Magic Internet Access/g' CHANGELOG.md
+          sed -i 's/科学上网/魔法上网/g' CHANGELOG.md
+          
+          git add .
+          if git diff --cached --quiet; then
+            echo "No changes to sync"
+            exit 0
+          fi
+          git commit -m "🔄 Sync from Scientific ${TAG}"
+          git push
+          git tag "${TAG}" 2>/dev/null || true
+          git push --tags 2>/dev/null || true

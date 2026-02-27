@@ -1,4 +1,4 @@
-name: Publish Release
+name: Release & Publish to ClawHub
 
 on:
   push:
@@ -12,15 +12,55 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Prepare Release Notes
+        run: |
+          VERSION=${GITHUB_REF_NAME}
+          # Save CHANGELOG_DRAFT before anything else
+          if [ -f CHANGELOG_DRAFT.md ] && [ -s CHANGELOG_DRAFT.md ]; then
+            cp CHANGELOG_DRAFT.md /tmp/release-body.md
+          else
+            echo "No CHANGELOG_DRAFT.md found, using git log" >&2
+            echo "### Changes" > /tmp/release-body.md
+            PREV_TAG=$(git tag --sort=-v:refname | sed -n '2p')
+            if [ -n "$PREV_TAG" ]; then
+              git log ${PREV_TAG}..${VERSION} --pretty=format:"- %s" --no-merges >> /tmp/release-body.md
+            else
+              git log --pretty=format:"- %s" --no-merges >> /tmp/release-body.md
+            fi
+          fi
+          # Append footer
+          cat >> /tmp/release-body.md << 'FOOTER'
+
+---
+
+### 📦 Install
+```bash
+clawhub install scientific-internet-access
+```
+
+### 🛡️ Supported Protocols
+
+VMess ✅ | VLESS ✅ | Trojan ✅ | Shadowsocks ✅
+
+### 📡 Links
+
+- 🌐 [shadowrocket.ai](https://shadowrocket.ai)
+- 📦 [ClawHub](https://clawhub.ai/skills/scientific-internet-access)
+- 💻 [GitHub](https://github.com/shadowrocketai/scientific-internet-access)
+FOOTER
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          generate_release_notes: true
+          name: "🔬 Scientific Internet Access ${{ github.ref_name }}"
+          body_path: /tmp/release-body.md
 
       - name: Publish to ClawHub
         run: |
           npm install -g clawhub
           clawhub login --token ${{ secrets.CLAWHUB_TOKEN }}
           VERSION=${GITHUB_REF_NAME#v}
-          clawhub publish . --version $VERSION || echo "Version $VERSION may already exist on ClawHub"
+          clawhub publish . --version $VERSION || echo "⚠️ Version $VERSION may already exist on ClawHub"

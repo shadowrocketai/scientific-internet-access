@@ -40,7 +40,7 @@ Unlike dumb subscription links, this skill gives your AI agent **context-aware i
 clawhub install scientific-internet-access
 ```
 
-One command. That's it. Your OpenClaw agent now speaks fluent 翻墙.
+One command. That's it. Your OpenClaw agent now speaks fluent 科学上网.
 
 ---
 
@@ -79,7 +79,7 @@ All sources are **public, community-maintained** GitHub repositories:
 
 ## 🇨🇳 这是什么？
 
-**科学上网术**——让你的AI机器人变成翻墙专家。
+**科学上网术**——让你的AI机器人变成科学上网专家。
 
 别再手动找节点了。装上这个skill，跟机器人说句"来个梯子"，AI自动：
 
@@ -88,7 +88,7 @@ All sources are **public, community-maintained** GitHub repositories:
 3. 🧠 智能推荐最快节点，匹配你的设备和客户端
 4. 📦 一键生成Clash/V2Ray/Surge/Shadowrocket配置
 
-**你的AI机器人 = 你的私人翻墙管家。**
+**你的AI机器人 = 你的私人科学上网管家。**
 
 ### 安装
 ```bash

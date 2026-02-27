@@ -48,13 +48,13 @@ One command. That's it. Your OpenClaw agent now speaks fluent 科学上网.
 
 | You Say | AI Does |
 |---------|---------|
-| 来个梯子 / give me nodes | Scrape → Test → Return top 5 working nodes |
-| 测速 / speed test | Parallel test all nodes, rank by latency |
-| 订阅链接 / subscription | Generate Base64 subscription link |
-| clash配置 / clash config | Export optimized Clash YAML |
-| 刷新节点 / refresh | Force re-scrape all 10+ sources |
-| 哪个最快 / fastest | Return the single lowest-latency node |
-| Windows + A | AI recommends client + generates matching config |
+| 上不了Google / 怎么翻墙 / I can't access Google | Asks your device (1-4), then auto scrapes → tests → returns config |
+| 有什么节点 / any nodes available | Same as above — full guided flow |
+| 不能用 / 连不上 / it's not working | Refreshes nodes, re-tests, gives new ones |
+| 太慢了 / too slow | Re-tests, returns only the fastest 3 |
+| 有日本的吗 / Japan nodes | Filters by country |
+| 怎么下载客户端 / how to install | Gives download guide for your device |
+| 订阅链接 / subscription link | Generates Base64 subscription URL |
 
 ---
 

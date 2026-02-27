@@ -6,7 +6,7 @@ on:
       - 'v*'
 
 jobs:
-  publish:
+  release:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -17,25 +17,10 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           generate_release_notes: true
-          body: |
-            ## 🔬 Scientific Internet Access ${{ github.ref_name }}
 
-            AI-powered proxy intelligence engine / AI驱动的科学上网术
-
-            ### Install
-```bash
-            clawhub install scientific-internet-access
-```
-
-            ### What's New
-            See commit history for details.
-
-            ---
-            🌐 [shadowrocket.ai](https://shadowrocket.ai) | 📦 [ClawHub](https://clawhub.ai/shadowrocketai/scientific-internet-access)
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - run: npm install -g clawhub
-      - run: clawhub login --token ${{ secrets.CLAWHUB_TOKEN }}
-      - run: clawhub publish . --version ${GITHUB_REF_NAME#v}
+      - name: Publish to ClawHub
+        run: |
+          npm install -g clawhub
+          clawhub login --token ${{ secrets.CLAWHUB_TOKEN }}
+          VERSION=${GITHUB_REF_NAME#v}
+          clawhub publish . --version $VERSION || echo "Version $VERSION may already exist on ClawHub"

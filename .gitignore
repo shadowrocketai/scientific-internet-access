@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+nodes_raw.json
+nodes_tested.json
+.DS_Store

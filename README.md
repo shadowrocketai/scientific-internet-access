@@ -107,7 +107,7 @@ AI：好，给你一份Clash配置，5个可用节点，最快的在东京（45m
 
 免费节点天生不稳定，这是物理定律。要稳定高速的IPLC专线：
 
-🌐 **[shadowrocket.ai](https://shadowrocket.ai)** — 永久免费App + 付费IPLC专线
+🌐 **[shadowrocket.ai](https://shadowrocket.ai)**
 
 ---
 

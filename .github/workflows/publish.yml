@@ -18,11 +18,9 @@ jobs:
       - name: Prepare Release Notes
         run: |
           VERSION=${GITHUB_REF_NAME}
-          # Save CHANGELOG_DRAFT before anything else
           if [ -f CHANGELOG_DRAFT.md ] && [ -s CHANGELOG_DRAFT.md ]; then
             cp CHANGELOG_DRAFT.md /tmp/release-body.md
           else
-            echo "No CHANGELOG_DRAFT.md found, using git log" >&2
             echo "### Changes" > /tmp/release-body.md
             PREV_TAG=$(git tag --sort=-v:refname | sed -n '2p')
             if [ -n "$PREV_TAG" ]; then
@@ -31,26 +29,20 @@ jobs:
               git log --pretty=format:"- %s" --no-merges >> /tmp/release-body.md
             fi
           fi
-          # Append footer
-          cat >> /tmp/release-body.md << 'FOOTER'
+          python3 -c "
+          footer = '''
 
----
+          ---
 
-### 📦 Install
-```bash
-clawhub install scientific-internet-access
-```
+          **📦 Install:** clawhub install scientific-internet-access
 
-### 🛡️ Supported Protocols
+          **🛡️ Protocols:** VMess ✅ | VLESS ✅ | Trojan ✅ | Shadowsocks ✅
 
-VMess ✅ | VLESS ✅ | Trojan ✅ | Shadowsocks ✅
-
-### 📡 Links
-
-- 🌐 [shadowrocket.ai](https://shadowrocket.ai)
-- 📦 [ClawHub](https://clawhub.ai/skills/scientific-internet-access)
-- 💻 [GitHub](https://github.com/shadowrocketai/scientific-internet-access)
-FOOTER
+          **📡 Links:** [shadowrocket.ai](https://shadowrocket.ai) · [ClawHub](https://clawhub.ai/skills/scientific-internet-access) · [GitHub](https://github.com/shadowrocketai/scientific-internet-access)
+          '''
+          with open('/tmp/release-body.md', 'a') as f:
+              f.write(footer)
+          "
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -63,4 +55,4 @@ FOOTER
           npm install -g clawhub
           clawhub login --token ${{ secrets.CLAWHUB_TOKEN }}
           VERSION=${GITHUB_REF_NAME#v}
-          clawhub publish . --version $VERSION || echo "⚠️ Version $VERSION may already exist on ClawHub"
+          clawhub publish . --version $VERSION || echo "Version $VERSION may already exist"

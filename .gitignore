@@ -3,3 +3,4 @@ __pycache__/
 nodes_raw.json
 nodes_tested.json
 .DS_Store
+CHANGELOG_DRAFT.md

@@ -25,13 +25,13 @@ Behind the Great Firewall, 1.4 billion people need a "ladder" (梯子) to reach 
 
 Unlike dumb subscription links, this skill gives your AI agent **context-aware intelligence**:
 
-1. You say "来个梯子" (give me a ladder)
-2. AI asks your device & client (or remembers from last time)
+1. You say "I can't access Google" or "上不了Google"
+2. AI asks your device (pick 1-4), one question at a time
 3. AI scrapes → tests → filters → formats — all automatically
 4. Returns optimized config ready to paste into your client
 5. Node dies? Just say "刷新" and AI fetches fresh ones
 
-**Your AI agent becomes your personal VPN concierge.** 🦞
+**Your AI agent becomes your personal Scientific Internet Access concierge.** 🦞
 
 ---
 
@@ -81,7 +81,7 @@ All sources are **public, community-maintained** GitHub repositories:
 
 **科学上网术**——让你的AI机器人变成科学上网专家。
 
-别再手动找节点了。装上这个skill，跟机器人说句"来个梯子"，AI自动：
+别再手动找节点了。装上这个skill，跟机器人说句"我想上Google"，AI自动：
 
 1. 🕷️ 从10+个GitHub源抓取最新免费节点
 2. ⚡ 20线程并发测速，过滤死节点
@@ -97,10 +97,12 @@ clawhub install scientific-internet-access
 
 ### 对话示例
 ```
-你：来个梯子
-AI：你主要用什么设备？
-你：Windows + Clash
-AI：好，给你一份Clash配置，5个可用节点，最快的在东京（45ms）...
+你：我想上Google
+AI：你用的什么设备？回复数字就行：
+    1. Windows电脑  2. Mac  3. iPhone/iPad  4. 安卓手机
+你：1
+AI：帮你找到了8个能用的节点，最快的在东京（45ms）。
+    给你生成了Clash配置，复制到Clash for Windows导入就能用。
 ```
 
 ### Coming Soon

@@ -1,4 +1,4 @@
-name: Publish to ClawHub
+name: Publish Release
 
 on:
   push:
@@ -8,8 +8,31 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          body: |
+            ## 🔬 Scientific Internet Access ${{ github.ref_name }}
+
+            AI-powered proxy intelligence engine / AI驱动的科学上网术
+
+            ### Install
+```bash
+            clawhub install scientific-internet-access
+```
+
+            ### What's New
+            See commit history for details.
+
+            ---
+            🌐 [shadowrocket.ai](https://shadowrocket.ai) | 📦 [ClawHub](https://clawhub.ai/shadowrocketai/scientific-internet-access)
+
       - uses: actions/setup-node@v4
         with:
           node-version: '22'

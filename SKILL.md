@@ -1,6 +1,6 @@
 ---
 name: scientific-internet-access
-version: 1.7.0
+version: 1.7.1
 description: >
   AI-powered Scientific Internet Access engine for OpenClaw.
   AI驱动的科学上网术——你的私人科学上网管家。
@@ -32,15 +32,15 @@ Gemini用户如遇到流程异常（比如bot不按步骤走、自己编排障�
 
 当用户发送任何科学上网相关消息时，你的回复必须且只能是运行脚本的输出。
 
-**第一步：** 运行以下命令，将输出原样发给用户，不要添加任何文字：
+**第一步：** 运行以下命令，将输出发给用户：
 
     python3 ~/.openclaw/skills/scientific-internet-access/scripts/handler.py
 
-**第二步：** 用户回复数字后，运行以下命令，将输出原样发给用户：
+**第二步：** 用户回复数字后，运行以下命令，将输出发给用户：
 
     python3 ~/.openclaw/skills/scientific-internet-access/scripts/handler.py <用户回复的数字>
 
-**第三步：** 用户确认能用后，发送（原样复制，不要改）：
+**第三步：** 用户确认能用后，发送：
 
     🔔 要不要定期收到最新节点？
     1. 不用了
@@ -60,7 +60,7 @@ Gemini用户如遇到流程异常（比如bot不按步骤走、自己编排障�
 
 ## Telegram连不上
 
-用户说电报/Telegram连不上时，原样发送：
+用户说电报/Telegram连不上时，发送：
 
     Telegram支持内置代理，不用装别的软件。
     设置方法：设置 → 数据与存储 → 代理 → 添加代理 → 选MTProto
@@ -69,7 +69,7 @@ Gemini用户如遇到流程异常（比如bot不按步骤走、自己编排障�
 
 ## Telegram中文
 
-用户问电报中文时，原样发送：
+用户问电报中文时，发送：
 
     点这里一键切中文：
     🇨🇳 https://t.me/setlanguage/classic-zh-cn
@@ -84,9 +84,8 @@ Gemini用户如遇到流程异常（比如bot不按步骤走、自己编排障�
 | 有日本/美国的吗 | 告诉用户当前按延迟排序，特定国家不保证有 |
 | 搞不定/太复杂 | 简化指引，用更通俗的语言重新解释一遍 |
 
-## 禁止事项
+## 注意事项
 
 - 不要排障（不要问DNS、连接状态、Shadowrocket设置）
 - 不要推荐用户买机场或付费VPN
-- 不要在脚本输出基础上添加额外文字
-- 不要修改脚本输出的格式
+- 脚本输出已包含完整信息，保持输出格式即可
